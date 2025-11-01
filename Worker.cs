@@ -84,24 +84,24 @@ public class Worker : BackgroundService
     
     private async Task HandleMessageAsync(string message)
     {
-        // 1. "Espia" o evento para descobrir o tipo
         var baseEvent = JsonSerializer.Deserialize<EventBase>(message);
+        if (baseEvent is null)
+            throw new Exception("Base Event was null");
 
-        // 2. Roteia para o handler correto
-        switch (baseEvent?.EventType)
+        switch (baseEvent.EventType)
         {
             case "order_created":
                 var createEvent = JsonSerializer.Deserialize<OrderCreatedEvent>(message);
                 _logger.LogInformation("Processando OrderCreatedEvent: {OrderId}", createEvent.OrderId);
                 await _repository.HandleOrderCreatedAsync(createEvent);
                 break;
-            
+
             case "order_item_added":
                 var itemAddedEvent = JsonSerializer.Deserialize<OrderItemAddedEvent>(message);
                 _logger.LogInformation("Processando OrderItemAddedEvent para: {OrderId}", itemAddedEvent.OrderId);
                 await _repository.HandleOrderItemAddedAsync(itemAddedEvent);
                 break;
-            
+
             // case "order_submitted": ...
 
             default:
