@@ -1,6 +1,6 @@
 using System;
 
-namespace orders.projection.worker.Adapters.Infra.Database.Options;
+namespace orders.customer.dash.worker.Adapters.Infra.Database.Options;
 
 public class MongoDbOptions
 {

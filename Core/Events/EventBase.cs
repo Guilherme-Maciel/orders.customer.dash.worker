@@ -1,6 +1,6 @@
 using System;
 
-namespace orders.projection.worker.Core.Events;
+namespace orders.customer.dash.worker.Core.Events;
 
 public class EventBase
 {

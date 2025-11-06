@@ -1,4 +1,4 @@
-namespace orders.projection.worker.Core.Projections.OrderSummary
+namespace orders.customer.dash.worker.Core.Projections.OrderSummary
 {
     public class OrderItem
     {

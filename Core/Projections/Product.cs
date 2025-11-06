@@ -1,6 +1,6 @@
 using System;
 
-namespace orders.projection.worker.Core.Ports.Repositories.Projections;
+namespace orders.customer.dash.worker.Core.Projections;
 
 public class Product
 {

@@ -1,10 +1,13 @@
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 
-namespace orders.projection.worker.Core.Ports.Repositories.Projections;
-
+namespace orders.customer.dash.worker.Core.Projections;
+[BsonIgnoreExtraElements]
 public class Customer
 {
-    public Guid CustomerId { get; set; }
+    [BsonId]
+    [BsonElement("_id")]
+    public Guid Id { get; set; }
     public string CustomerName { get; set; }
 
 }

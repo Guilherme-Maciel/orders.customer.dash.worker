@@ -1,9 +1,12 @@
 using Microsoft.Extensions.Options;
-using orders.projection.worker;
-using orders.projection.worker.Adapters.Infra.Database.Options;
-using orders.projection.worker.Adapters.Infra.Messaging.Options;
-using orders.projection.worker.Adapters.Infra.Repositories;
-using orders.projection.worker.Core.Ports.Repositories;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
+using orders.customer.dash.worker;
+using orders.customer.dash.worker.Adapters.Infra.Database.Options;
+using orders.customer.dash.worker.Adapters.Infra.Messaging.Options;
+using orders.customer.dash.worker.Adapters.Infra.Repositories;
+using orders.customer.dash.worker.Core.Ports.Repositories;
 using RabbitMQ.Client;
 
 var builder = Host.CreateApplicationBuilder(args);
@@ -11,7 +14,9 @@ var builder = Host.CreateApplicationBuilder(args);
 builder.Services.Configure<MongoDbOptions>(builder.Configuration.GetSection("MongoDb"));
 builder.Services.Configure<RabbitMqOptions>(builder.Configuration.GetSection("RabbitMq"));
 
-builder.Services.AddSingleton<IOrderSummaryRepository, OrderSummaryRepository>();
+BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
+
+builder.Services.AddSingleton<ICustomerDashRepository, OrderSummaryRepository>();
 
 builder.Services.AddSingleton(sp =>
 {

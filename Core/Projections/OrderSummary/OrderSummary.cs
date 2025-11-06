@@ -1,7 +1,7 @@
 using System;
-using orders.projection.worker.Core.Projections.OrderSummary;
+using orders.customer.dash.worker.Core.Projections;
 
-namespace orders.projection.worker.Core.Ports.Repositories.Projections;
+namespace orders.customer.dash.worker.Core.Projections.OrderSummary;
 
 public class OrderSummary
 {
