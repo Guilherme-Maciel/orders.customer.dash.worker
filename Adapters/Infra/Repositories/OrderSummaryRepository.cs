@@ -33,6 +33,7 @@ public class OrderSummaryRepository : ICustomerDashRepository
             .PushEach(p => p.RecentOrders, [new RecentOrder()
             {
                 OrderId = @event.OrderId,
+                Timestamp = @event.Timestamp
             }],
             slice: 5,
             sort: sortDefinition);
